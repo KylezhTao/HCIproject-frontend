@@ -1,0 +1,163 @@
+{
+  "node": [
+    {
+      "name": "徐志摩",
+      "uuid": "1",
+      "imgsrc": "https://ftp.bmp.ovh/imgs/2021/03/de94a8ed72bbe28f.jpg",
+      "type": "人物",
+      "color": "rgb(127,127,213)",
+      "shape": "piccircle"
+    },
+    {
+      "name": "梁思成",
+      "uuid": "2",
+      "imgsrc": "https://ftp.bmp.ovh/imgs/2021/03/b5d03b95d606ad92.jpg",
+      "type": "人物",
+      "color": "rgb(125,213,255)",
+      "shape": "diamond"
+    },
+    {
+      "name": "金岳霖",
+      "uuid": "3",
+      "imgsrc": "https://ftp.bmp.ovh/imgs/2021/03/4408d74d7667839c.jpg",
+      "type": "人物",
+      "color": "rgb(112,211,189)",
+      "shape": "star"
+    },
+    {
+      "name": "林徽因",
+      "uuid": "4",
+      "imgsrc": "https://ftp.bmp.ovh/imgs/2021/03/77af88cd0b16b3c5.jpg",
+      "type": "人物",
+      "color": "rgb(234,145,176)",
+      "shape": "triangle"
+    },
+    {
+      "name": "陆小曼",
+      "uuid": "5",
+      "imgsrc": "https://ftp.bmp.ovh/imgs/2021/03/6c750693ad07c91e.jpg",
+      "type": "人物",
+      "color": "rgb(249,198,44)",
+      "shape": "downtriangle"
+    },
+    {
+      "name": "《再别康桥》",
+      "uuid": "6",
+      "imgsrc": "https://ftp.bmp.ovh/imgs/2021/03/eab776ea80100c77.jpg",
+      "type": "作品",
+      "color": "rgb(127,127,213)",
+      "shape": "roundrectangle"
+    },
+    {
+      "name": "梁启超",
+      "uuid": "7",
+      "imgsrc": "https://ftp.bmp.ovh/imgs/2021/03/7cfdb35f29b7d801.jpg",
+      "type": "人物",
+      "color": "rgb(255,131,115)",
+      "shape": "square"
+    },
+    {
+      "name": "清华大学",
+      "uuid": "8",
+      "imgsrc": "",
+      "type": "地点",
+      "color": "rgb(112,211,189)",
+      "shape": "circle"
+
+    },
+    {
+      "name": "蔡元培",
+      "uuid": "9",
+      "imgsrc": "",
+      "type": "人物",
+      "color": "rgb(234,145,176)",
+      "shape": "diamond"
+    }
+  ],
+  "relationship": [
+    {
+      "sourceid": "1",
+      "targetid": "2",
+      "name": "情敌",
+      "uuid": "1"
+    },
+    {
+      "sourceid": "3",
+      "targetid": "2",
+      "name": "情敌",
+      "uuid": "2"
+    },
+    {
+      "sourceid": "3",
+      "targetid": "4",
+      "name": "默默陪伴",
+      "uuid": "3"
+    },
+    {
+      "sourceid": "2",
+      "targetid": "4",
+      "name": "夫妻",
+      "uuid": "4"
+    },
+    {
+      "sourceid": "4",
+      "targetid": "2",
+      "name": "夫妻",
+      "uuid": "5"
+    },
+    {
+      "sourceid": "1",
+      "targetid": "4",
+      "name": "爱慕",
+      "uuid": "6"
+    },
+    {
+      "sourceid": "1",
+      "targetid": "5",
+      "name": "夫妻",
+      "uuid": "7"
+    },
+    {
+      "sourceid": "5",
+      "targetid": "1",
+      "name": "夫妻",
+      "uuid": "8"
+    },
+    {
+      "sourceid": "6",
+      "targetid": "1",
+      "name": "代表作",
+      "uuid": "9"
+    },
+    {
+      "sourceid": "7",
+      "targetid": "1",
+      "name": "老师",
+      "uuid": "10"
+    },
+    {
+      "sourceid": "7",
+      "targetid": "2",
+      "name": "父亲",
+      "uuid": "11"
+    },
+    {
+      "sourceid": "7",
+      "targetid": "4",
+      "name": "公公",
+      "uuid": "12"
+    },
+    {
+      "sourceid": "9",
+      "targetid": "8",
+      "name": "校长",
+      "uuid": "13"
+    },
+    {
+      "sourceid": "4",
+      "targetid": "8",
+      "name": "校友",
+      "uuid": "14"
+    }
+  ]
+}
