@@ -1,1 +1,1 @@
-# HMIproject-frontend
+# HCIproject-frontend
