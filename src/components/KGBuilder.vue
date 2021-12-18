@@ -1,37 +1,38 @@
 <template>
   <div>
+    <!--  详细信息弹窗  -->
     <div>
       <el-dialog title="详细信息" @close="closeMoreInformationDialog" :visible.sync="moreInformationFormVisible" style="overflow: hidden; text-align: left ; top:-10px;">
         <el-container>
           <el-main>
             <el-form label-width="80px">
-            <el-form-item v-if="this.moreInformationNodeType==='Group'" label="集团名称">
-              {{this.moreInformationNodeName}}
-            </el-form-item>
-            <el-form-item v-if="this.moreInformationNodeType==='Brand'" label="酒店名称">
-              {{this.moreInformationNodeName}}
-            </el-form-item>
-            <el-form-item v-if="this.moreInformationNodeType==='Brand'" label="所属集团">
-              {{this.groupname}}
-            </el-form-item>
+              <el-form-item v-if="this.moreInformationNodeType==='Group'" label="集团名称">
+                {{this.moreInformationNodeName}}
+              </el-form-item>
+              <el-form-item v-if="this.moreInformationNodeType==='Brand'" label="酒店名称">
+                {{this.moreInformationNodeName}}
+              </el-form-item>
+              <el-form-item v-if="this.moreInformationNodeType==='Brand'" label="所属集团">
+                {{this.groupname}}
+              </el-form-item>
               <el-form-item v-if="this.moreInformationNodeType==='Brand'" label="酒店档次">
                 {{this.moreInformationNodeRank}}
               </el-form-item>
               <label width="100px" v-if="this.moreInformationNodeType==='Brand'">
                 <img :src="this.moreInformationNodePic" style="width: 100px;position:absolute;right:15%; top:20%">
               </label>
-            <el-form-item v-if="this.moreInformationNodeType==='Brand'" style="white-space: pre-line" label="酒店信息">
-              {{this.moreInformationNodeData}}
-            </el-form-item>
-            <el-form-item  v-if="this.moreInformationNodeType==='Group'" style="white-space: pre-line" label="集团信息">
-              {{this.moreInformationNodeData}}
-            </el-form-item>
-            <el-form-item  v-if="this.moreInformationNodeType==='Checkout'" label="退房时间">
-              {{this.moreInformationNodeName}}酒店最晚可以在{{this.moreInformationNodeRight}}退房。
-            </el-form-item>
-            <el-form-item  v-if="this.moreInformationNodeType==='Breakfast'" label="早餐份数">
-              {{this.moreInformationNodeName}}酒店最多提供{{this.moreInformationNodeRight}}早餐。
-            </el-form-item>
+              <el-form-item v-if="this.moreInformationNodeType==='Brand'" style="white-space: pre-line" label="酒店信息">
+                {{this.moreInformationNodeData}}
+              </el-form-item>
+              <el-form-item v-if="this.moreInformationNodeType==='Group'" style="white-space: pre-line" label="集团信息">
+                {{this.moreInformationNodeData}}
+              </el-form-item>
+              <el-form-item v-if="this.moreInformationNodeType==='Checkout'" label="退房时间">
+                {{this.moreInformationNodeName}}酒店最晚可以在{{this.moreInformationNodeRight}}退房。
+              </el-form-item>
+              <el-form-item v-if="this.moreInformationNodeType==='Breakfast'" label="早餐份数">
+                {{this.moreInformationNodeName}}酒店最多提供{{this.moreInformationNodeRight}}早餐。
+              </el-form-item>
             </el-form>
           </el-main>
         </el-container>
@@ -39,23 +40,42 @@
     </div>
 
     <input type="checkbox" id="sidemenu" />
+    <!--  侧边栏控制钮  -->
     <div id="wrap">
       <label id="sideMenuControl" for="sidemenu">≡</label>
-      <!--for 属性规定 label 与哪个表单元素绑定，即将这个控制侧边栏进出的按钮与checkbox绑定-->
     </div>
-
+    <!--  侧边栏  -->
     <div id="aside">
-      <h2>6PlusCOIN MENU</h2>
+      <h2>GoodOrder 好订</h2>
+      <!--   信息   -->
+      <div class="collapse-item">
+        <input type="checkbox" id="collapse5" class="collapse-toggle" />
+        <label style="display: flex;" for="collapse5">
+          <h4>
+            <i class="el-icon-arrow-right"></i>
+            用户信息 INFO
+          </h4>
+        </label>
+
+        <div class="content">
+          <div class="svg-set-box0">
+            <a>
+              <li>
+                <textarea id="text"></textarea>
+              </li>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!--  统计  -->
       <div class="collapse-item">
         <input type="checkbox" id="collapse0" class="collapse-toggle" />
         <label style="display: flex;" for="collapse0">
           <div>
             <h4>
-              <i
-                  class="el-icon-arrow-right"
-                  style="transition: ease-in-out"
-              ></i>
-              统计 STATISTICS
+              <i class="el-icon-arrow-right" style="transition: ease-in-out"></i>
+              图表统计 CHART
             </h4>
           </div>
         </label>
@@ -64,6 +84,7 @@
         </div>
       </div>
 
+      <!--  切换  -->
       <div class="collapse-item">
         <input type="checkbox" id="collapse8" class="collapse-toggle" />
         <label style="display: flex;" for="collapse8">
@@ -111,41 +132,58 @@
         </div>
       </div>
 
+      <!--  搜索  -->
       <div class="collapse-item">
-        <input type="checkbox" id="collapse1" class="collapse-toggle" />
-        <label style="display: flex;" for="collapse1">
-          <div>
-            <h4>
-              <i
-                  class="el-icon-arrow-right"
-                  style="transition: ease-in-out"
-              ></i>
-              导出 EXPORT
-            </h4>
-          </div>
+        <input type="checkbox" id="collapse6" class="collapse-toggle" />
+        <label style="display: flex;" for="collapse6">
+          <h4>
+            <i class="el-icon-arrow-right"></i>
+            节点搜索 SEARCH
+          </h4>
         </label>
 
         <div class="content">
-          <div class="collapse-card" id="download">
-            <a href="javascript:;" @click="exportPNG">
-              <li><i class="el-icon-picture-outline"></i> 保存为图片</li>
-            </a>
-            <a href="javascript:;" @click="exportJSON">
-              <li><i class="el-icon-document"></i> 保存为JSON</li>
-            </a>
-            <a href="javascript:;" @click="exportXML">
-              <li><i class="el-icon-document-copy"></i> 保存为XML</li>
-            </a>
+          <div id="search" class="collapse-card">
+            <div class="holder" style="margin-bottom: 10px">
+              <span style="font-size: 1.2em"> 节点名称：</span>
+              <textarea id="nodeSearch"></textarea>
+              <div class="search_menu" style="margin-bottom: 4px;float: left">
+                <li v-for="item in historyList.nName" :key="item.id" @click="inputHistory(item, 0)">
+                  {{ item }}
+                </li>
+              </div>
+            </div>
+            <div class="holder" style="margin-bottom: 4px;float: left">
+              <span style="font-size: 1.2em"> 节点类型：</span>
+              <textarea id="typeSearch"></textarea>
+              <div class="search_menu" style="margin-bottom: 4px;float: left">
+                <li v-for="item in historyList.nType" :key="item.id" @click="inputHistory(item, 2)">
+                  {{ item }}
+                </li>
+              </div>
+            </div>
+
+            <div>
+              <a href="javascript:;" @click="search">
+                <li style="margin-left:20%; margin-bottom:25px;">
+                  <i class="el-icon-search"></i> 搜索
+                </li>
+              </a>
+              <a href="javascript:;" @click="restartPicture(0)">
+                <li style="margin-right: 30%"><i class="el-icon-refresh"></i> 还原</li>
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
+      <!--  调整  -->
       <div class="collapse-item">
         <input type="checkbox" id="collapse2" class="collapse-toggle" />
         <label style="display: flex;" for="collapse2">
           <h4>
             <i class="el-icon-arrow-right"></i>
-            调整 ADJUST
+            布局调整 ADJUST
           </h4>
         </label>
         <div class="content">
@@ -172,65 +210,28 @@
         </div>
       </div>
 
+      <!--  导出  -->
       <div class="collapse-item">
-        <input type="checkbox" id="collapse6" class="collapse-toggle" />
-        <label style="display: flex;" for="collapse6">
-          <h4>
-            <i class="el-icon-arrow-right"></i>
-            搜索 SEARCH
-          </h4>
-        </label>
-
-        <div class="content">
-          <div id="search" class="collapse-card">
-            <div class="holder" style="margin-bottom: 10px">
-              <span style="font-size: 1.2em"> 节点名称：</span>
-              <textarea id="nodeSearch"></textarea>
-              <div class="search_menu" style="margin-bottom: 4px;float: left">
-                <li v-for="item in historyList.nName" :key="item.id" @click="inputHistory(item, 0)">
-                  {{ item }}
-                </li>
-              </div>
-            </div>
-            <div class="holder" style="margin-bottom: 4px;float: left">
-              <span style="font-size: 1.2em"> 类型检索：</span>
-              <textarea id="typeSearch"></textarea>
-              <div class="search_menu" style="margin-bottom: 4px;float: left">
-                <li v-for="item in historyList.nType" :key="item.id" @click="inputHistory(item, 2)">
-                  {{ item }}
-                </li>
-              </div>
-            </div>
-
-            <div>
-              <a href="javascript:;" @click="search">
-                <li style="margin-left:20%; margin-bottom:25px;">
-                  <i class="el-icon-search"></i> 搜索
-                </li>
-              </a>
-              <a href="javascript:;" @click="restartPicture(0)">
-                <li style="margin-right: 30%"><i class="el-icon-refresh"></i> 还原</li>
-              </a>
-            </div>
+        <input type="checkbox" id="collapse1" class="collapse-toggle" />
+        <label style="display: flex;" for="collapse1">
+          <div>
+            <h4>
+              <i class="el-icon-arrow-right" style="transition: ease-in-out"></i>
+              图谱导出 EXPORT
+            </h4>
           </div>
-        </div>
-      </div>
-
-      <div class="collapse-item">
-        <input type="checkbox" id="collapse5" class="collapse-toggle" />
-        <label style="display: flex;" for="collapse5">
-          <h4>
-            <i class="el-icon-arrow-right"></i>
-            文本查看 JSON VIEW
-          </h4>
         </label>
 
         <div class="content">
-          <div class="svg-set-box0">
-            <a>
-              <li>
-                <textarea id="text"></textarea>
-              </li>
+          <div class="collapse-card" id="download">
+            <a href="javascript:;" @click="exportPNG">
+              <li><i class="el-icon-picture-outline"></i> 保存为图片</li>
+            </a>
+            <a href="javascript:;" @click="exportJSON">
+              <li><i class="el-icon-document"></i> 保存为JSON</li>
+            </a>
+            <a href="javascript:;" @click="exportXML">
+              <li><i class="el-icon-document-copy"></i> 保存为XML</li>
             </a>
           </div>
         </div>
@@ -1692,6 +1693,10 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   /*动画效果的执行方式是ease-out，即侧边栏滑动效果为渐变式，而不是生硬的突然变化*/
+}
+
+::-webkit-scrollbar{
+  width: 0 !important;
 }
 
 h2 {
