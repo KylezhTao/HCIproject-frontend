@@ -1,5 +1,13 @@
 <template>
   <div>
+    <!-- 右下角“?”帮助 -->
+    <div class="helper-btn">
+      <el-tooltip effect="dark" 
+            content="遇到问题？点我帮助！" placement="top-start">
+        <el-button type="warning" icon="el-icon-question" circle></el-button>
+      </el-tooltip>
+    </div>
+
     <!--  详细信息弹窗  -->
     <div>
       <el-dialog title="详细信息" @close="closeMoreInformationDialog" :visible.sync="moreInformationFormVisible" style="overflow: hidden; text-align: left ; top:-10px;">
@@ -51,10 +59,12 @@
       <div class="collapse-item">
         <input type="checkbox" id="collapse5" class="collapse-toggle" />
         <label style="display: flex;" for="collapse5">
-          <h4>
-            <i class="el-icon-arrow-right"></i>
-            用户信息 INFO
-          </h4>
+          <div>
+            <h4>
+              <i class="el-icon-arrow-right"></i>
+              用户信息 INFO
+            </h4>
+          </div>
         </label>
 
         <div class="content">
@@ -74,7 +84,7 @@
         <label style="display: flex;" for="collapse0">
           <div>
             <h4>
-              <i class="el-icon-arrow-right" style="transition: ease-in-out"></i>
+              <i class="el-icon-arrow-right"></i>
               图表统计 CHART
             </h4>
           </div>
@@ -90,10 +100,7 @@
         <label style="display: flex;" for="collapse8">
           <div>
             <h4>
-              <i
-                  class="el-icon-arrow-right"
-                  style="transition: ease-in-out"
-              ></i>
+              <i class="el-icon-arrow-right"></i>
               集团切换 SWITCH
             </h4>
           </div>
@@ -136,17 +143,19 @@
       <div class="collapse-item">
         <input type="checkbox" id="collapse6" class="collapse-toggle" />
         <label style="display: flex;" for="collapse6">
-          <h4>
-            <i class="el-icon-arrow-right"></i>
-            节点搜索 SEARCH
-          </h4>
+          <div>
+            <h4>
+              <i class="el-icon-arrow-right"></i>
+              节点搜索 SEARCH
+            </h4>
+          </div>
         </label>
 
         <div class="content">
           <div id="search" class="collapse-card">
             <div class="holder" style="margin-bottom: 10px">
               <span style="font-size: 1.2em"> 节点名称：</span>
-              <textarea id="nodeSearch"></textarea>
+              <textarea id="nodeSearch" @keydown.enter="e => { search(); e.preventDefault(); }"></textarea>
               <div class="search_menu" style="margin-bottom: 4px;float: left">
                 <li v-for="item in historyList.nName" :key="item.id" @click="inputHistory(item, 0)">
                   {{ item }}
@@ -154,8 +163,11 @@
               </div>
             </div>
             <div class="holder" style="margin-bottom: 4px;float: left">
-              <span style="font-size: 1.2em"> 节点类型：</span>
-              <textarea id="typeSearch"></textarea>
+              <el-tooltip effect="dark" 
+                content="类型：酒店集团 / 品牌 / 早餐份数 / 最晚退房时间" placement="top-start">
+                <span style="font-size: 1.2em"> 节点类型：</span>
+              </el-tooltip>
+              <textarea id="typeSearch" @keydown.enter="e => { search(); e.preventDefault(); }"></textarea>
               <div class="search_menu" style="margin-bottom: 4px;float: left">
                 <li v-for="item in historyList.nType" :key="item.id" @click="inputHistory(item, 2)">
                   {{ item }}
@@ -181,10 +193,12 @@
       <div class="collapse-item">
         <input type="checkbox" id="collapse2" class="collapse-toggle" />
         <label style="display: flex;" for="collapse2">
-          <h4>
-            <i class="el-icon-arrow-right"></i>
-            布局调整 ADJUST
-          </h4>
+          <div>
+            <h4>
+              <i class="el-icon-arrow-right"></i>
+              布局调整 ADJUST
+            </h4>
+          </div>
         </label>
         <div class="content">
           <div id="adjust" class="collapse-card">
@@ -216,7 +230,7 @@
         <label style="display: flex;" for="collapse1">
           <div>
             <h4>
-              <i class="el-icon-arrow-right" style="transition: ease-in-out"></i>
+              <i class="el-icon-arrow-right"></i>
               图谱导出 EXPORT
             </h4>
           </div>
@@ -404,8 +418,8 @@ export default {
 
       nodeTextSize: 12, // 节点字体大小
       linkTextSize: 10, // 关系字体大小
-      linkTextVisible: true, //是否显示关系文字
-      nodeForce: -200 //节点之间作用力大小，绝对值越大距离越大
+      linkTextVisible: false, //是否显示关系文字
+      nodeForce: -150 //节点之间作用力大小，绝对值越大距离越大
 
     };
   },
@@ -469,7 +483,7 @@ export default {
               "link",
               d3
                   .forceLink()
-                  .distance(60)
+                  .distance(80)
                   .id(function(d) {
                     return d.uuid;
                   })
@@ -579,7 +593,7 @@ export default {
         d3.select(".nodetext").style("fill-opacity", 1);
         d3.selectAll(".linkline")
             .style("stroke-opacity", 1)
-            .style("stroke-width", 1);
+            .style("stroke-width", 1.5);
         d3.selectAll(".linktext").style("fill-opacity", 1);
         d3.selectAll(".arrowmarker").style("fill-opacity", 1);
       });
@@ -1460,6 +1474,10 @@ export default {
       this.initGraphContainer(i);
       this.addMaker();
       this.initGraph(i);
+
+      d3.selectAll(".node circle")
+      .transition().duration(500).ease(d3.easeLinear)
+      .style("filter", "none");
     },
 
     // 搜索
@@ -1477,6 +1495,10 @@ export default {
       }
       this.selected.nodes.splice(0, _this.selected.nodes.length);
       var nName = document.getElementById("nodeSearch").value;
+
+      // 全角冒号替换为半角冒号
+      nName = nName.replace(/：/g, ":")
+
       if (nName !== "") {
         this.searchVal(nName, 0);
       }
@@ -1495,6 +1517,15 @@ export default {
           }
         }
         if (nType !== "") {
+          let map = {
+            "酒店集团": "Group",
+            "品牌": "Brand",
+            "早餐份数": "Breakfast",
+            "最晚退房时间": "Checkout",
+          }
+
+          nType = map[nType];
+
           //带类型要求的节点搜索
           for (let j = 0; j < _this.selected.nodes.length; j++) {
             if (_this.selected.nodes[j].type.indexOf(nType) === -1) {
@@ -1518,15 +1549,28 @@ export default {
       }
 
       for (let i = 0; i < _this.graph.nodes.length; i++) {
+        this.graph.nodes[i].highlight = false;
         for (let j = 0; j < _this.selected.nodes.length; j++) {
           if (_this.graph.nodes[i].uuid === _this.selected.nodes[j].uuid) {
             //目标节点
             this.graph.nodes[i].shape = "piccircle";
             this.graph.nodes[i].imgsrc =
                 "https://ftp.bmp.ovh/imgs/2021/04/b699004a2fa6b17d.png";
+            this.graph.nodes[i].highlight = true;
           }
         }
       }
+
+      d3.selectAll(".node circle")
+        .filter( d => d.highlight === true)
+        .transition().duration(500).ease(d3.easeLinear)
+        .style("filter", "drop-shadow(0 0 20px #F9E632)");
+      
+      d3.selectAll(".node circle")
+        .filter( d => d.highlight !== true)
+        .transition().duration(500).ease(d3.easeLinear)
+        .style("filter", "none");
+
       this.updateGraph();
       await _this.$message({
         type: "success",
@@ -1647,7 +1691,7 @@ export default {
 .content {
   max-height: 0px;
   overflow: hidden;
-  transition: 0.7s ease-in-out;
+  transition: 0.5s ease-in;
   background-color: rgba(196, 194, 194, 0.3);
   width: 100%;
   border-width: 0;
@@ -1661,11 +1705,13 @@ export default {
   max-height: 800px;
 }
 
-.collapse-toggle:checked ~ label .el-icon-arrow-right {
+.collapse-toggle:checked ~ label div .el-icon-arrow-right {
   transform: rotate(90deg);
+  transition: transform .3s ease-in-out;
 }
 
-.collapse-toggle:not(:checked) ~ label .el-icon-arrow-right {
+.collapse-toggle:not(:checked) ~ label div .el-icon-arrow-right {
+  transition: transform .3s ease-in-out;
 }
 
 .collapse-card {
@@ -1947,4 +1993,12 @@ li {
   height: 100vh;
   width: 100vw;
 }
+
+.helper-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0 15px 15px 0;
+}
+
 </style>

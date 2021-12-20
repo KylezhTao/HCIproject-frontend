@@ -6,7 +6,7 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios";
 import x2js from "x2js";
-import echarts from "echarts";
+import * as echarts from "echarts";
 
 Vue.prototype.$x2js = new x2js();
 

@@ -19,6 +19,7 @@
       </div>
       <div id="dialogue-container" class="dialogue-container">
         <p class="dialogue-service-container">
+          <img src="../assets/answer.png" class="avatar"/>
           <span class="dialogue-text dialogue-service-text">请输入您的问题</span>
         </p>
       </div>
@@ -27,7 +28,7 @@
           <span class="dialogue-hint-icon">!</span>
           <span class="dialogue-hint-text">输入不能为空</span>
         </p>
-        <textarea id="dialogue-input" class="dialogue-input-text" placeholder="输入您的问题">
+        <textarea id="dialogue-input" class="dialogue-input-text" placeholder="请输入您的问题">
 
         </textarea>
         <div id="dialogue-input-tool" class="dialogue-input-tool">
@@ -46,7 +47,11 @@ import $ from "jquery";
 import {getAnswer} from "@/api/qaApi";
 export default {
   name: "dialog_box",
-  data(){},
+  data(){
+    return {
+      
+    }
+  },
   mounted() {
     this.simulator()
   },
@@ -138,11 +143,18 @@ export default {
         }else{
           console.log('create a bubble')
           var nodeP =doc.createElement('p'),
-              nodeSpan=doc.createElement('span');
+              nodeSpan=doc.createElement('span'),
+              customerAvatar = doc.createElement('img');
           nodeP.classList.add('dialogue-customer-container');
           nodeSpan.classList.add('dialogue-text','dialogue-customer-text');
+          customerAvatar.classList.add('avatar');
+
+          // 默认头像
+          customerAvatar.src = "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
+
           nodeSpan.innerHTML=dialogueInput.value;
           nodeP.appendChild(nodeSpan);
+          nodeP.appendChild(customerAvatar);
           dialogueContainer.appendChild(nodeP);
           dialogueContainer.scrollTop=dialogueContainer.scrollHeight;
           submitCustomerText(dialogueInput.value);
@@ -158,10 +170,14 @@ export default {
 
       function getServiceText(serviceText){
         var nodeP = doc.createElement('p'),
-            nodeSpan =doc.createElement('span');
+            nodeSpan =doc.createElement('span'),
+            serviceAvatar = doc.createElement('img');
         nodeP.classList.add('dialogue-service-container');
         nodeSpan.classList.add('dialogue-text','dialogue-service-text');
+        serviceAvatar.src = require('../assets/answer.png');
+        serviceAvatar.classList.add('avatar');
         nodeSpan.innerHTML=serviceText;
+        nodeP.appendChild(serviceAvatar);
         nodeP.appendChild(nodeSpan);
         dialogueContainer.appendChild(nodeP);
         dialogueContainer.scrollTop=dialogueContainer.scrollHeight;
@@ -197,8 +213,6 @@ export default {
 
     },
 
-
-
   }
 };
 </script>
@@ -207,6 +221,7 @@ export default {
 body{
   position: relative;
 }
+
 .dialogue-wrapper{
   font-size: 14px;
   color: #fff;
@@ -342,7 +357,7 @@ body{
   padding: 10px;
   height: 500px;
   word-wrap: break-word;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .dialogue-wrapper .dialogue-main .dialogue-text{
@@ -351,20 +366,29 @@ body{
   padding: 10px;
   max-width: 320px;
   white-space: pre-wrap;
-  border: 1px solid #09d07d;
   border-radius: 4px;
-  background-color: #09d07d;
   box-sizing: border-box;
 }
 
+.dialogue-service-container .dialogue-text{
+  border: 1px solid #3fcc91;
+  background-color: #3fcc91;
+}
+
+.dialogue-customer-container .dialogue-text{
+  border: 1px solid #4c69c7;
+  background-color: #4c69c7;
+}
+
 .dialogue-wrapper .dialogue-main .dialogue-service-container{
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
   text-align: left;
 }
 /*dialogue-wrapper .dialogue-main .dialogue-text*/
 .dialogue-wrapper .dialogue-main .dialogue-service-text{
   margin-left: 20px;
-
 }
 
 .dialogue-wrapper .dialogue-main .dialogue-service-text:before{
@@ -376,16 +400,20 @@ body{
   height: 0;
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
-  border-right: 10px solid #09d07d;
+  border-right: 10px solid #3fcc91;
   -webkit-transform: translate(0,-50%);
   transform: translate(0,-50%);
 }
 .dialogue-wrapper .dialogue-main .dialogue-customer-container{
-  margin-bottom:10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
   text-align: right;
 }
 .dialogue-wrapper .dialogue-main .dialogue-customer-text{
   margin-right: 20px;
+  text-align:left;
 }
 .dialogue-wrapper .dialogue-main .dialogue-customer-text:after{
   content: '';
@@ -396,7 +424,7 @@ body{
   height: 0;
   border-top: 6px solid transparent;
   border-bottom: 6px solid transparent;
-  border-left:10px solid #09d07d;;
+  border-left:10px solid #4c69c7;
   -webkit-transform: translate(0,-50%);
   transform: translate(0,-50%);
 
@@ -486,5 +514,13 @@ body{
   box-shadow: 1px 1px 4px rgba(0,0,0,.2);
   background-color: #7F7FD5;
 
+}
+
+.avatar {
+  left: 20px;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background-color: rgb(242,249,255);
 }
 </style>
