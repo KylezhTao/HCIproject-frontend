@@ -11,15 +11,14 @@
         <div class="dialogue-service-info">
           <i class="dialogue-service-img"></i>
           <div class="dialogue-service-title">
-            <p class="dialogue-service-name">智能客服</p>
+            <p class="dialogue-service-name">智能问答机器人</p>
           </div>
         </div>
       </div>
       <div id="dialogue-container" class="dialogue-container">
         <p class="dialogue-service-container">
-          <img src="../assets/answer.png" class="avatar" />
-          <span class="dialogue-text dialogue-service-text">
-            请输入您的问题
+          <img src="../assets/robot.jpg" class="avatar" />
+          <span class="dialogue-text dialogue-service-text">我是AI小Q，你有什么连锁酒店方面的问题都可以问我哦😉！
           </span>
         </p>
       </div>
@@ -175,7 +174,7 @@ export default {
           serviceAvatar = doc.createElement('img')
         nodeP.classList.add('dialogue-service-container')
         nodeSpan.classList.add('dialogue-text', 'dialogue-service-text')
-        serviceAvatar.src = require('../assets/answer.png')
+        serviceAvatar.src = require('../assets/robot.jpg')
         serviceAvatar.classList.add('avatar')
         nodeSpan.innerHTML = serviceText
         nodeP.appendChild(serviceAvatar)
@@ -331,13 +330,12 @@ body {
   width: 40px;
   height: 40px;
   text-align: center;
-  inline-height: 40px;
   vertical-align: middle;
   color: #000;
   border-radius: 50%;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
   background-color: white;
-  background-image: url('../assets/answer.png');
+  background-image: url('../assets/robot.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   -moz-background-size: 100% 100%;

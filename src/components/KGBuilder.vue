@@ -99,7 +99,13 @@
     <input type="checkbox" id="sidemenu" />
     <!--  侧边栏控制钮  -->
     <div id="wrap">
-      <label id="sideMenuControl" for="sidemenu">≡</label>
+      <label v-if="isVisitor" id="sideMenuControl" for="sidemenu">≡</label>
+      <label for="sidemenu" v-else>
+        <img
+          :src="userInfo.avatar"
+          style="width: 1.5em; height: 1.5em; line-height: 1.5em; border-radius: 24px;"
+        />
+      </label>
     </div>
     <!--  侧边栏  -->
     <div id="aside">
@@ -118,43 +124,52 @@
 
         <div class="content">
           <div style="margin: 15px 10px;">
-            <el-descriptions size="mini" v-if="!isVisitor"
-            :column="1" direction="horizontal" border>
-                <el-descriptions-item label="头像">
-                  <img :src="userInfo.avatar" alt="暂无头像" class="img-avatar"/>
-                </el-descriptions-item>
-                <el-descriptions-item label="邮箱">{{ userInfo.email }}</el-descriptions-item>
-                <el-descriptions-item label="昵称">{{ userInfo.username }}</el-descriptions-item>
-                <el-descriptions-item label="手机号">{{ userInfo.phoneNumber }}</el-descriptions-item>
-                <el-descriptions-item label="拥有会员">
-                  <el-tag v-for="vip in userInfo.vipList" :key="vip" size="small" style="margin-right: 8px;">{{ vip }}</el-tag>
-                </el-descriptions-item>
+            <el-descriptions
+              size="mini"
+              v-if="!isVisitor"
+              :column="1"
+              direction="horizontal"
+              border
+            >
+              <el-descriptions-item label="头像">
+                <img :src="userInfo.avatar" alt="暂无头像" class="img-avatar" />
+              </el-descriptions-item>
+              <el-descriptions-item label="邮箱">
+                {{ userInfo.email }}
+              </el-descriptions-item>
+              <el-descriptions-item label="昵称">
+                {{ userInfo.username }}
+              </el-descriptions-item>
+              <el-descriptions-item label="手机号">
+                {{ userInfo.phoneNumber }}
+              </el-descriptions-item>
+              <el-descriptions-item label="拥有会员">
+                <el-tag
+                  v-for="vip in userInfo.vipList"
+                  :key="vip"
+                  size="small"
+                  style="margin-right: 8px;"
+                >
+                  {{ vip }}
+                </el-tag>
+              </el-descriptions-item>
             </el-descriptions>
             <div v-else>当前以🧍‍♂️游客🧍‍♂️身份登录</div>
           </div>
-          <div v-if="!isVisitor" style="margin-bottom:20px;">
-            <el-popconfirm
-              title="确定要登出账号吗？"
-              @confirm="logoutAccount"
-            >
-              <el-button slot="reference"
-                type="danger"
-                icon="el-icon-top"
-              >
-              登出
+          <div v-if="!isVisitor" style="margin-bottom: 20px;">
+            <el-popconfirm title="确定要登出账号吗？" @confirm="logoutAccount">
+              <el-button slot="reference" type="danger" icon="el-icon-top">
+                登出
               </el-button>
             </el-popconfirm>
           </div>
-          <div v-else style="margin-bottom:20px;">
+          <div v-else style="margin-bottom: 20px;">
             <el-popconfirm
               title="确定要返回登录界面吗？"
               @confirm="logoutAccount"
             >
-              <el-button slot="reference"
-                type="danger"
-                icon="el-icon-top"
-              >
-              返回登录界面
+              <el-button slot="reference" type="danger" icon="el-icon-top">
+                返回登录界面
               </el-button>
             </el-popconfirm>
           </div>
@@ -460,7 +475,7 @@ import { getGroupNameList, getGraphByGroupName } from '../api/groupApi'
 import { getDetailByBrandName, getPicByBrandName } from '../api/myCoinApi'
 import { getDetailByGroupName } from '../api/groupApi'
 import { logout } from '../api/userApi'
-import router from "@/router/index.js"
+import router from '@/router/index.js'
 
 export default {
   props: ['pid', 'groupname'],
@@ -613,7 +628,7 @@ export default {
       linkTextVisible: false, //是否显示关系文字
       nodeForce: -150, //节点之间作用力大小，绝对值越大距离越大
 
-      isVisitor: localStorage.getItem('userToken') === '""'  // 是否游客登录
+      isVisitor: localStorage.getItem('userToken') === '""', // 是否游客登录
     }
   },
   components: {},
@@ -996,10 +1011,18 @@ export default {
               .attr('height', 1)
               .attr('width', 1)
 
+            // tri_down_pattern
+            //   .append('polygon')
+            //   .attr('points', '30,55 10,20 50,20')
+            //   .attr('fill', d.color)
             tri_down_pattern
-              .append('polygon')
-              .attr('points', '30,55 10,20 50,20')
-              .attr('fill', d.color)
+              .append('image')
+              .attr('x', 0)
+              .attr('y', 0)
+              // .attr("preserveAspectRatio","none")
+              .attr('width', 60)
+              .attr('height', 60)
+              .attr('xlink:href', d.imgsrc)
             return 'url(#tri_down_pattern' + i + ')'
 
           case 'triangle':
@@ -1903,8 +1926,8 @@ export default {
         })
         this.$store.commit('setuserToken', '') // 更新userToken
         this.$store.commit('setuserInfo', '')
-        router.push("/login")
-        console.log("logout: " + localStorage.getItem('userToken'))
+        router.push('/login')
+        console.log('logout: ' + localStorage.getItem('userToken'))
       }
     },
   },
@@ -1912,7 +1935,7 @@ export default {
 </script>
 <style scoped>
 .img-avatar {
-  width: 48px; 
+  width: 48px;
   height: 48px;
   border-radius: 24px;
 }
