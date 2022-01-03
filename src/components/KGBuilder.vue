@@ -1,7 +1,21 @@
 <template>
   <div>
+
+    <div class="pop" v-if="showModal" id="popout">
+        <!--帮助内容-->
+        <div class="helpText">
+          <div class="text" color="black">
+          1. 点击左上角图标打开侧边栏<br>
+          2. 点击右侧开启智能问答机器人<br>
+          3. 点击下方按钮或屏幕黑色区域退出提示
+          </div>
+          <button @click="showModal=false" class="okbtn">我知道了</button>
+        </div>
+        <div class="over" @click="showModal=false"></div>
+    </div>
+
     <!-- 右下角“?”帮助 -->
-    <div class="helper-btn">
+    <div @click="showModal=true" class="helper-btn">
       <el-tooltip
         effect="dark"
         content="遇到问题？点我帮助！"
@@ -629,6 +643,8 @@ export default {
       nodeForce: -150, //节点之间作用力大小，绝对值越大距离越大
 
       isVisitor: localStorage.getItem('userToken') === '""', // 是否游客登录
+
+      showModal: false
     }
   },
   components: {},
@@ -636,6 +652,13 @@ export default {
     this.initGraphContainer(0)
     this.addMaker()
     this.initGraph(0)
+
+    document.addEventListener('click', (e) => {
+      const pop = document.getElementById('popout');
+      if (showModal && !pop.contains(e.target)) {
+        this.showModal = false;
+      }
+    })
   },
   created() {},
   watch: {},
@@ -1930,6 +1953,8 @@ export default {
         console.log('logout: ' + localStorage.getItem('userToken'))
       }
     },
+
+
   },
 }
 </script>
@@ -1970,6 +1995,74 @@ export default {
     /*上边阴影  */ inset 0px 0px 0px 0px rgba(18, 29, 29, 0.25),
     /*左边阴影 */ inset 0px 0px 0px 0px rgba(18, 29, 29, 0.25),
     /*右边阴影  */ inset 0px -5px 5px 0px rgba(18, 29, 29, 0); /*下边阴影  */
+}
+
+
+.helpText {
+  position: fixed;
+  font-size: 24px;
+  color: black;
+  height: 360px;
+  width: 640px;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 0.25rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  animation:window-open 0.5s 1;
+}
+.text {
+  margin-top: 20px;
+  margin-left: 30px;
+  text-align: left;
+}
+.okbtn {
+  position: absolute;
+  font-size: 20px;
+  height: 40px;
+  width: 100px;
+  left: 50%;
+  bottom: 10px;
+  transform: translate(-50%,-50%);
+  border-radius: 0.5rem;
+  background-color: white;
+}
+.over {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;/*透明度为70%*/
+  filter: alpha(opacity=70);
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background-color: #111111;
+}
+@keyframes window-open
+{
+  0% {
+    /*opacity: 0;
+    left: 29.2%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: scale3d(0.1, 0.1, 1);*/
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -50%);
+  }
+
+  100% {
+    /*opacity: 1;
+    left: 29.2%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: scale3d(1, 1, 1);*/
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .collapse-toggle:checked ~ .content {

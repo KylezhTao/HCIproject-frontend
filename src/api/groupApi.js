@@ -1,13 +1,13 @@
 import axios from "axios";
-import {baseURL} from "@/api/util/apiConfig";
+import { baseURL } from "@/api/util/apiConfig";
 
 /**
  * 获得集团名列表
  * @returns {Promise<string[]>}
  */
 export async function getGroupNameList() {
-    let response = await axios.get(baseURL + "/getGroupNameList", {});
-    return response.data;
+  let response = await axios.get(baseURL + "/getGroupNameList", {});
+  return response.data;
 }
 
 /**
@@ -16,15 +16,15 @@ export async function getGroupNameList() {
  * @returns {Promise<null|*>}
  */
 export async function getGraphByGroupName(groupName) {
-    let params = {
-        "groupName": groupName
-    };
-    try {
-        let response = await axios.post(baseURL + "/getGraphByGroupName", params);
-        return response.data;
-    } catch (e) {
-        return null;
-    }
+  let params = {
+    groupName: groupName
+  };
+  try {
+    let response = await axios.post(baseURL + "/getGraphByGroupName", params);
+    return response.data;
+  } catch (e) {
+    return null;
+  }
 }
 
 /**
@@ -33,11 +33,11 @@ export async function getGraphByGroupName(groupName) {
  * @returns {Promise<string>}
  */
 export async function getDetailByGroupName(groupName) {
-    let params = {"groupName": groupName};
-    try {
-        let response = await axios.post(baseURL + "/getDetailByGroupName", params);
-        return response.data.detail;
-    } catch (e) {
-        return "暂无信息。";
-    }
+  let params = { groupName: groupName };
+  try {
+    let response = await axios.post(baseURL + "/getDetailByGroupName", params);
+    return response.data.detail;
+  } catch (e) {
+    return "暂无信息。";
+  }
 }

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "caniuse-lite": "^1.0.30001295",
     "core-js": "^3.6.5",
     "cytoscape": "^3.18.1",
     "cytoscape-cola": "^2.4.0",
