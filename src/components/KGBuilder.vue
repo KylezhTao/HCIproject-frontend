@@ -5,9 +5,12 @@
         <!--帮助内容-->
         <div class="helpText">
           <div class="text" color="black">
+          <p>帮助</p>
           1. 点击左上角图标打开侧边栏<br>
           2. 点击右侧开启智能问答机器人<br>
-          3. 点击下方按钮或屏幕黑色区域退出提示
+          3. 双击节点查看详细信息<br>
+          4. 鼠标停留在节点上可以查看与之相关联的节点<br>
+          5. 点击下方按钮或屏幕黑色区域退出提示
           </div>
           <button @click="showModal=false" class="okbtn">我知道了</button>
         </div>
@@ -113,6 +116,13 @@
     <input type="checkbox" id="sidemenu" />
     <!--  侧边栏控制钮  -->
     <div id="wrap">
+      <el-tooltip
+          effect="dark"
+         placement="top-start"
+        >
+        <div slot="content">用户名：{{userInfo.username}}</div>
+        <el-button type="warning" icon="el-icon-question" circle></el-button>
+
       <label v-if="isVisitor" id="sideMenuControl" for="sidemenu">≡</label>
       <label for="sidemenu" v-else>
         <img
@@ -120,6 +130,7 @@
           style="width: 1.5em; height: 1.5em; line-height: 1.5em; border-radius: 24px;"
         />
       </label>
+      </el-tooltip>
     </div>
     <!--  侧边栏  -->
     <div id="aside">
