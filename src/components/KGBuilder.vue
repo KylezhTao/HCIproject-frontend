@@ -1,24 +1,37 @@
 <template>
   <div>
-
     <div class="pop" v-if="showModal" id="popout">
-        <!--帮助内容-->
-        <div class="helpText">
-          <div class="text" color="black">
-          <p>使用帮助</p>
-          1. 左上角图标可展开侧边栏<br/>
-          2. 右侧为智能问答框，可以询问有关连锁酒店优惠、早餐、退房时间等问题<br/>
-          3. 双击节点可以查看详细信息<br/>
-          4. 鼠标停留在节点上将高亮与之直接相关联的节点<br/>
+      <!--帮助内容-->
+      <div class="helpText">
+        <div class="text">
+          <p style="font-size: 24px; font-weight: 600; color: #d75455;">
+            使用帮助
+          </p>
+          1. 左上角图标可展开侧边栏
+          <br />
+          2. 右侧为智能问答框，可以询问有关连锁酒店优惠、早餐、退房时间等问题
+          <br />
+          3. 双击节点可以查看详细信息
+          <br />
+          4. 鼠标停留在节点上将高亮与之直接相关联的节点
+          <br />
           5. 酒店集团及品牌的LOGO图片加载可能稍慢，请耐心等待
-          </div>
-          <button @click="showModal=false" class="okbtn">我知道了</button>
         </div>
-        <div class="over" @click="showModal=false"></div>
+        <el-button
+          @click="showModal = false"
+          type="success"
+          round
+          icon="el-icon-check"
+          class="okbtn"
+        >
+          我知道了
+        </el-button>
+      </div>
+      <div class="over" @click="showModal = false"></div>
     </div>
 
     <!-- 右下角“?”帮助 -->
-    <div @click="showModal=true" class="helper-btn">
+    <div @click="showModal = true" class="helper-btn">
       <el-tooltip
         effect="dark"
         content="遇到问题？点我帮助！"
@@ -116,20 +129,22 @@
     <input type="checkbox" id="sidemenu" />
     <!--  侧边栏控制钮  -->
     <div id="wrap">
-      <el-tooltip
-          effect="dark"
-         placement="top-start"
-        >
-        <div slot="content">用户名：{{userInfo.username}}</div>
+      <el-tooltip effect="dark" placement="top-start">
+        <div slot="content">用户名：{{ userInfo.username }}</div>
         <el-button type="warning" icon="el-icon-question" circle></el-button>
 
-      <label v-if="isVisitor" id="sideMenuControl" for="sidemenu">≡</label>
-      <label for="sidemenu" v-else>
-        <img
-          :src="userInfo.avatar"
-          style="width: 1.5em; height: 1.5em; line-height: 1.5em; border-radius: 24px;"
-        />
-      </label>
+        <label v-if="isVisitor" id="sideMenuControl" for="sidemenu">≡</label>
+        <label for="sidemenu" v-else>
+          <img
+            :src="userInfo.avatar"
+            style="
+              width: 1.5em;
+              height: 1.5em;
+              line-height: 1.5em;
+              border-radius: 24px;
+            "
+          />
+        </label>
       </el-tooltip>
     </div>
     <!--  侧边栏  -->
@@ -655,7 +670,7 @@ export default {
 
       isVisitor: localStorage.getItem('userToken') === '""', // 是否游客登录
 
-      showModal: false
+      showModal: false,
     }
   },
   components: {},
@@ -665,9 +680,9 @@ export default {
     this.initGraph(0)
 
     document.addEventListener('click', (e) => {
-      const pop = document.getElementById('popout');
+      const pop = document.getElementById('popout')
       if (showModal && !pop.contains(e.target)) {
-        this.showModal = false;
+        this.showModal = false
       }
     })
   },
@@ -1964,8 +1979,6 @@ export default {
         console.log('logout: ' + localStorage.getItem('userToken'))
       }
     },
-
-
   },
 }
 </script>
@@ -2008,7 +2021,6 @@ export default {
     /*右边阴影  */ inset 0px -5px 5px 0px rgba(18, 29, 29, 0); /*下边阴影  */
 }
 
-
 .helpText {
   position: fixed;
   font-size: 24px;
@@ -2017,42 +2029,36 @@ export default {
   width: 640px;
   margin-top: 20px;
   background-color: #ffffff;
+  border-top: 2px solid #d75455;
   border-radius: 0.25rem;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
-  animation:window-open 0.5s 1;
+  animation: window-open 0.5s 1;
 }
 .text {
-  margin-top: 20px;
-  margin-left: 30px;
+  margin: 20px 30px;
   text-align: left;
 }
 .okbtn {
   position: absolute;
   font-size: 20px;
-  height: 40px;
-  width: 100px;
   left: 50%;
-  bottom: 10px;
-  transform: translate(-50%,-50%);
-  border-radius: 0.5rem;
-  background-color: white;
+  transform: translate(-50%, -50%);
 }
 .over {
   position: fixed;
   width: 100%;
   height: 100%;
-  opacity: 0.7;/*透明度为70%*/
+  opacity: 0.7; /*透明度为70%*/
   filter: alpha(opacity=70);
   top: 0;
   left: 0;
   z-index: 999;
   background-color: #111111;
 }
-@keyframes window-open
-{
+@keyframes window-open {
   0% {
     /*opacity: 0;
     left: 29.2%;
