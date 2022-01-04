@@ -7,13 +7,13 @@
           <p style="font-size: 24px; font-weight: 600; color: #d75455;">
             使用帮助
           </p>
-          1. 左上角图标可展开侧边栏
+          1. 图谱节点分为三层：集团、品牌、早餐和退房时间左上角图标可展开侧边栏
           <br />
-          2. 右侧为智能问答框，可以询问有关连锁酒店优惠、早餐、退房时间等问题
+          2. 鼠标停留在节点上将高亮与之直接相关联的节点,双击节点可以查看详细信息
           <br />
-          3. 双击节点可以查看详细信息
+          3. 左上角图标可展开侧边栏,可以进行集团切换和搜索等操作
           <br />
-          4. 鼠标停留在节点上将高亮与之直接相关联的节点
+          4. 右上角为智能问答框，可以询问有关连锁酒店优惠、早餐、退房时间等问题
           <br />
           5. 酒店集团及品牌的LOGO图片加载可能稍慢，请耐心等待
         </div>
@@ -2016,11 +2016,11 @@ export default {
 
 .helpText {
   position: fixed;
-  font-size: 24px;
+  font-size: 20px;
   color: black;
   height: 360px;
   width: 640px;
-  margin-top: 20px;
+  margin-top: 10px;
   background-color: #ffffff;
   border-top: 2px solid #d75455;
   border-radius: 0.25rem;
@@ -2031,10 +2031,11 @@ export default {
   animation: window-open 0.5s 1;
 }
 .text {
-  margin: 20px 30px;
+  margin: 10px 30px;
   text-align: left;
 }
 .okbtn {
+  margin-top: 25px;
   position: absolute;
   font-size: 20px;
   left: 50%;
