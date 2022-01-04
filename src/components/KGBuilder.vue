@@ -27,11 +27,11 @@
           我知道了
         </el-button>
       </div>
-      <div class="over" @click="showModal = false"></div>
+      <div class="over" @click="() => showModal = false"></div>
     </div>
 
     <!-- 右下角“?”帮助 -->
-    <div @click="showModal = true" class="helper-btn">
+    <div @click="() => showModal = true" class="helper-btn">
       <el-tooltip
         effect="dark"
         content="遇到问题？点我帮助！"
@@ -130,7 +130,7 @@
     <!--  侧边栏控制钮  -->
     <div id="wrap">
       <el-tooltip effect="dark" placement="top-start">
-        <div slot="content">用户名：{{ userInfo.username }}</div>
+        <div slot="content">{{ isVisitor?"游客":"用户名：" + userInfo.username }}</div>
         <el-button type="warning" icon="el-icon-question" circle></el-button>
 
         <label v-if="isVisitor" id="sideMenuControl" for="sidemenu">≡</label>
@@ -678,13 +678,6 @@ export default {
     this.initGraphContainer(0)
     this.addMaker()
     this.initGraph(0)
-
-    document.addEventListener('click', (e) => {
-      const pop = document.getElementById('popout')
-      if (this.showModal && !pop.contains(e.target)) {
-        this.showModal = false
-      }
-    })
   },
   created() {},
   watch: {},
