@@ -681,7 +681,7 @@ export default {
 
     document.addEventListener('click', (e) => {
       const pop = document.getElementById('popout')
-      if (showModal && !pop.contains(e.target)) {
+      if (this.showModal && !pop.contains(e.target)) {
         this.showModal = false
       }
     })
